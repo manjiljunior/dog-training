@@ -1,0 +1,40 @@
+@keyframes rotate-love {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes Slide {
+  0% {
+    top: -5px;
+    bottom: auto;
+  }
+  25% {
+    top: 0px;
+    bottom: auto;
+  }
+  50% {
+    top: 5px;
+    bottom: auto;
+  }
+  75% {
+    top: 0px;
+    bottom: auto;
+  }
+  100% {
+    top: -5px;
+    bottom: auto;
+  }
+}

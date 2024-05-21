@@ -1,0 +1,313 @@
+@import "./animations";
+@import "./globals";
+@import "./pages.scss";
+
+.Hero {
+  background-image: url("/images/hero-mask-image.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  float: left;
+  width: auto;
+  z-index: 2;
+
+  @media screen and (max-width: 600px) {
+    background-image: none;
+    background-color: #eddfd1;
+  }
+}
+
+.MemberCard {
+  img {
+    -webkit-mask-image: url("/images/image-mask.png");
+    mask-image: url("/images/image-mask.png");
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  &:hover {
+    .MemberCard__icon {
+      stroke: white;
+      fill: white;
+    }
+  }
+}
+
+.Footer {
+  padding: 200px 0 0px 0;
+  z-index: 0;
+
+  &::before {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: -2px;
+    width: 101%;
+    height: 100%;
+    background: var(--footer);
+    mask-image: url("/images/footer-mask.png");
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    -webkit-mask-image: url("/images/footer-mask.png");
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    z-index: -1;
+  }
+
+  &__logo {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      -webkit-mask-image: url("/icons/title-decoration.svg");
+      mask-image: url("/icons/title-decoration.svg");
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      background-color: hsl(var(--secondary));
+      top: -35px;
+      bottom: auto;
+      left: -60px;
+      right: auto;
+      margin: auto;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    &__logo {
+      &::before {
+        width: 30px;
+        height: 30px;
+        left: -40px;
+        top: -20px;
+      }
+    }
+  }
+}
+
+.NavSiteDrawer {
+  &__logo {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      -webkit-mask-image: url("/icons/title-decoration.svg");
+      mask-image: url("/icons/title-decoration.svg");
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      background-color: hsl(var(--secondary));
+      top: -25px;
+      bottom: auto;
+      left: -30px;
+      right: auto;
+      margin: auto;
+    }
+  }
+}
+
+.MembershipCard {
+  &__media {
+    background-image: url("/images/membership.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px;
+    height: 20rem;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-mask-image: url("/images/membership-mask.png");
+      mask-image: url("/images/membership-mask.png");
+      -webkit-mask-position: left bottom;
+      mask-position: left bottom;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      background-color: white;
+    }
+  }
+}
+
+.PageHeader {
+  background-image: url("/images/page-header-overlay.png");
+  background-attachment: inherit;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #f2d70a;
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 230px;
+    left: 0;
+    bottom: 0;
+    background: white;
+    -webkit-mask-image: url("/images/page-header-mask.png");
+    -webkit-mask-position: bottom center;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-size: contain;
+    mask-image: url("/images/page-header-mask.png");
+    mask-position: bottom center;
+    mask-repeat: repeat-x;
+    mask-size: contain;
+  }
+
+  &__title {
+    &::before {
+      position: absolute;
+      content: "";
+      left: 200px;
+      bottom: 0;
+      width: 104px;
+      height: 110px;
+      background: black;
+      -webkit-mask-image: url("/images/page-header-icon-1.svg");
+      -webkit-mask-size: cover;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center center;
+      mask-image: url("/images/page-header-icon-1.svg");
+      mask-size: cover;
+      mask-repeat: no-repeat;
+      mask-position: center center;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      right: 270px;
+      bottom: 0;
+      width: 53px;
+      height: 53px;
+      background: black;
+      -webkit-mask-image: url("/images/page-header-icon-2.svg");
+      -webkit-mask-size: cover;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center center;
+      mask-image: url("/images/page-header-icon-2.svg");
+      mask-size: cover;
+      mask-repeat: no-repeat;
+      mask-position: center center;
+    }
+  }
+
+  &__breadcrumb {
+    &::before {
+      position: absolute;
+      content: "";
+      bottom: -140px;
+      left: 48%;
+      right: 50%;
+      width: 83px;
+      height: 63px;
+      background: black;
+      -webkit-mask-image: url("/images/page-header-icon-3.svg");
+      -webkit-mask-size: cover;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center center;
+      mask-image: url("/images/page-header-icon-3.svg");
+      mask-size: cover;
+      mask-repeat: no-repeat;
+      mask-position: center center;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    &__title,
+    &__breadcrumb {
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.SectionStats {
+  background-color: #ffc412;
+
+  &__right {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 130%;
+      top: 0;
+      bottom: 0;
+      left: -3rem;
+      margin: auto;
+      background-image: linear-gradient(
+        45deg,
+        transparent,
+        rgb(178 75 37),
+        transparent
+      );
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    &__right {
+      &::before {
+        top: -12.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 3px;
+        bottom: none !important;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    &__right {
+      &::before {
+        top: -10.5rem;
+      }
+    }
+  }
+}
+
+.SectionReviews {
+  &__shape {
+    animation: Slide 2s linear infinite;
+    transform-origin: center;
+  }
+}
+
+.ReviewCard {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.ServiceCard {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: max-height 1s;
+}
+
+.no-scroll {
+  max-height: 100vh !important;
+  overflow: hidden !important;
+}

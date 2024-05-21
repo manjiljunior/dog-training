@@ -1,0 +1,34 @@
+.ContactPage {
+  &__banner {
+    -webkit-mask-image: url("/images/blob-mask.png");
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center center;
+    -webkit-mask-repeat: no-repeat;
+  }
+
+  &__overlay {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-mask-image: url("/images/blob-overlay.png");
+      mask-image: url("/images/blob-overlay.png");
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      background-color: #ecdfcf;
+      z-index: 0;
+      left: -100px;
+      right: 0;
+      top: -180px;
+      bottom: 0;
+      margin: auto;
+      -webkit-animation: rotate-love 5000ms ease-in-out infinite;
+      animation: rotate-love 5000ms ease-in-out infinite;
+    }
+  }
+}
