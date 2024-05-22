@@ -1,8 +1,10 @@
+"use client";
+import React, { useContext } from "react";
 import Image from "next/image";
-import React from "react";
 import { TfiEmail } from "react-icons/tfi";
 import { FaPhoneAlt } from "react-icons/fa";
 import { Button } from "../ui/button";
+import { GlobalContext } from "@/context/global";
 
 const FEATURES = [
   {
@@ -25,7 +27,13 @@ const FEATURES = [
   },
 ];
 
-const SectionAbout = () => {
+interface Props {
+  data: any;
+}
+
+const SectionAbout = ({ data }: Props) => {
+  const { globalData } = useContext(GlobalContext);
+
   return (
     <div className="mobile414:gap-y-[2.5rem] sm:w-[80%] sm:gap-0 pb-section w-[70%] mx-auto grid grid-cols-12 gap-[4rem] items-center">
       <div className="sm:col-span-12 col-span-6">
@@ -33,7 +41,7 @@ const SectionAbout = () => {
           className="mx-auto w-full h-auto"
           height={600}
           width={600}
-          src={"/images/about.png"}
+          src={data?.image?.original}
           alt="About Image"
         />
       </div>
@@ -47,17 +55,15 @@ const SectionAbout = () => {
             src={"/icons/title-decoration.svg"}
             alt="title decoration"
           />
-          Our Passion Is Providing Superior Pet Care
+          {data?.title}
         </h2>
 
         <p className="mobile414:text-[.95rem] text-[1.2rem] font-medium text-text-dark">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, esse?
-          Odit molestiae culpa earum iste autem a, inventore ratione corporis,
-          doloremque.
+          {data?.text}
         </p>
 
         <div className="mobile414:gap-y-[1.5rem] flex flex-wrap items-center gap-y-[2.25rem]">
-          {FEATURES.map((item, i) => (
+          {data?.features.map((item, i) => (
             <div
               key={i}
               className="mobile414:gap-2 w-[50%] flex items-center gap-3"
@@ -76,7 +82,7 @@ const SectionAbout = () => {
           ))}
         </div>
 
-        <div className="mobile414:text-[.9rem] sm:flex-col sm:items-start sm:gap-y-[1.5rem] flex items-center flex-wrap pt-[1rem]">
+        <div className="mobile414:text-[.9rem] sm:flex-col sm:items-start sm:gap-y-[1.5rem] flex items-center flex-nowrap pt-[1rem] gap-4">
           <div className="mobile414:w-full w-[50%] flex gap-3 justify-start items-center">
             <div className="h-[2.75rem] w-[2.75rem] shrink-0 rounded-full flex items-center justify-center bg-black/90">
               <TfiEmail size={22} color="white" />
@@ -86,7 +92,7 @@ const SectionAbout = () => {
               <span className="font-[400] leading-[1] text-[1rem] capitalize text-text-dark">
                 Email us anytime
               </span>
-              <span className="font-bold">info@example.com</span>
+              <span className="font-bold">{globalData?.global?.email}</span>
             </div>
           </div>
 
@@ -99,7 +105,9 @@ const SectionAbout = () => {
               <span className="font-[400] leading-[1] text-[1rem] capitalize text-text-dark">
                 Call as anytime
               </span>
-              <span className="font-bold">+977 9821991011</span>
+              <span className="font-bold">
+                {globalData?.global?.phones?.[0]?.name}
+              </span>
             </div>
           </div>
         </div>

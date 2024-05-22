@@ -29,13 +29,25 @@ export const projects = [
   },
 ];
 
-const SectionServices = () => {
+export interface Service {
+  name: string;
+  slug: string;
+  description?: string;
+  icon: any;
+  image: any;
+}
+
+interface Props {
+  data: [Service];
+}
+
+const SectionServices = ({ data }: Props) => {
   return (
     <div className="pb-section">
       <SectionTitle title="our services" />
 
       <div className="sm:w-[90%] w-[80%] mx-auto">
-        <Services items={projects} />
+        <Services items={data} />
       </div>
     </div>
   );

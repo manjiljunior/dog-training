@@ -1,9 +1,12 @@
 "use client";
 import React, { createContext, useState, ReactNode, useEffect } from "react";
+import api from "@/lib/api";
+import qs from "qs";
 
 interface GlobalContextProps {
   menu: boolean;
   setMenu: (val: boolean) => void;
+  globalData: any;
 }
 
 export const GlobalContext = createContext<GlobalContextProps>(
@@ -16,6 +19,35 @@ interface GlobalProviderProps {
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   const [menu, setMenu] = useState(false);
+  const [globalData, setGlobalData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      await fetchGlobalDataHandler();
+    })();
+  }, []);
+
+  const fetchGlobalDataHandler = async () => {
+    const query = qs.stringify(
+      {
+        populate: ["global", "global.phones"],
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+
+    const res = await api.get(`/global?${query}`);
+    if (res.data) {
+      const formattedObj = {
+        id: res.data.data.id,
+        global: res.data.data.attributes.global,
+      };
+      setGlobalData(formattedObj);
+    } else {
+      setGlobalData(null);
+    }
+  };
 
   useEffect(() => {
     if (menu) {
@@ -34,6 +66,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
       value={{
         menu,
         setMenu,
+        globalData,
       }}
     >
       {children}

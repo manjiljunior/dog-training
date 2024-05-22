@@ -3,9 +3,13 @@ import Image from "next/image";
 import React from "react";
 import Header from "../Header";
 import { usePathname } from "next/navigation";
-import PageHeader from "../PageHeader";
+import Link from "next/link";
 
-const Hero = () => {
+interface Props {
+  data: any;
+}
+
+const Hero = ({ data }: Props) => {
   const pathname = usePathname();
 
   if (pathname !== "/") {
@@ -34,21 +38,25 @@ const Hero = () => {
               src={"/icons/title-decoration.svg"}
               alt="title decoration"
             />
-            professional, stress-free pet care experience
+            {data?.title}
           </h1>
 
           <p className="mobile414:my-[2.5rem] mobile414:text-[.95rem] mobile414:leading-[1.65] my-[3.5rem] text-[1.2rem] font-[400] leading-[1.5] drop-shadow-sm">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum in
-            recusandae adipisci libero. Distinctio natus doloribus tempore,
-            culpa eaque modi ea accusantium ex nostrum maxime ad nemo?
+            {data?.text}
           </p>
 
           <div className="mobile414:gap-[1rem] flex gap-[3rem] items-center">
-            <button className="mobile414:text-[.725rem] uppercase text-[.9rem] rounded-full bg-primary text-primary-foreground py-2 px-6 transition-all hover:bg-black hover:text-white font-medium tracking-[1.5px]">
-              our services
-            </button>
+            <Link
+              href={data?.cta_btn?.url || ""}
+              className="mobile414:text-[.725rem] uppercase text-[.9rem] rounded-full bg-primary text-primary-foreground py-2 px-6 transition-all hover:bg-black hover:text-white font-medium tracking-[1.5px]"
+            >
+              {data?.cta_btn?.name}
+            </Link>
 
-            <div className="mobile414:gap-2 mobile414:text-[.725rem] flex text-text-dark cursor-pointer tracking-[1.5px] gap-3 items-center uppercase text-[1rem] font-semibold">
+            <Link
+              href={data?.secondary_btn?.url || ""}
+              className="mobile414:gap-2 mobile414:text-[.725rem] flex text-text-dark cursor-pointer tracking-[1.5px] gap-3 items-center uppercase text-[1rem] font-semibold"
+            >
               <Image
                 className="mobile414:w-[1.25rem] mobile414:h-auto"
                 height={32}
@@ -56,8 +64,8 @@ const Hero = () => {
                 src="/icons/telephone.svg"
                 alt="Icon"
               />
-              schedule a call
-            </div>
+              {data?.secondary_btn?.name}
+            </Link>
           </div>
         </div>
         <div className="mobile991:col-span-12 col-span-6 text-center flex items-center justify-center">
@@ -66,8 +74,8 @@ const Hero = () => {
               className="w-[90%] h-auto"
               width={500}
               height={800}
-              src={"/images/hero-1.png"}
-              alt="Hero Image"
+              src={data?.image?.original}
+              alt={data?.title || "Hero Banner"}
             />
           </div>
         </div>

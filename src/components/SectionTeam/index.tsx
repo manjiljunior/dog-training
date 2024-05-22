@@ -4,7 +4,23 @@ import Member from "./Member";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-const SectionTeam = () => {
+export interface TeamMember {
+  name: string;
+  tagline: string;
+  socials: [
+    {
+      name: string;
+      link: string;
+    }
+  ];
+  image: any;
+}
+
+interface Props {
+  data: [TeamMember];
+}
+
+const SectionTeam = ({ data }: Props) => {
   return (
     <div className="mobile414:gap-0 mobile414:gap-y-[2.5rem] relative flex flex-col gap-[3.5rem] py-section bg-[#ffe9ed] mb-section">
       <Image
@@ -18,9 +34,9 @@ const SectionTeam = () => {
       <SectionTitle title="Meet our dog trainers" subtitle="our team" />
 
       <div className="sm:w-[90%] w-[80%] sm:gap-0 sm:gap-y-[2.5rem] mx-auto grid grid-cols-12 gap-[2.25rem] ">
-        {Array.from({ length: 3 }).map((item, i) => (
+        {data.map((item, i) => (
           <div key={i} className="sm:col-span-12 col-span-4">
-            <Member />
+            <Member data={item} />
           </div>
         ))}
       </div>

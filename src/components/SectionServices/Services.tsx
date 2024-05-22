@@ -3,15 +3,14 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
+import { Service } from ".";
+import Link from "next/link";
 
 const Services = ({
   items,
   className,
 }: {
-  items: {
-    title: string;
-    icon: string;
-  }[];
+  items: Service[];
   className?: string;
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -47,17 +46,19 @@ const Services = ({
               />
             )}
           </AnimatePresence>
-          <Card isFirst={idx === 0 ? true : false}>
-            <Image
-              className="mobile414:w-[3.5rem] h-auto w-[5rem]"
-              height={100}
-              width={100}
-              src={item.icon}
-              alt={item.title}
-            />
+          <Link href={item.slug || ""}>
+            <Card isFirst={idx === 0 ? true : false}>
+              <Image
+                className="mobile414:w-[3.5rem] h-auto w-[5rem]"
+                height={100}
+                width={100}
+                src={item.icon?.original}
+                alt={item.name}
+              />
 
-            <CardTitle>{item.title}</CardTitle>
-          </Card>
+              <CardTitle>{item.name}</CardTitle>
+            </Card>
+          </Link>
         </div>
       ))}
     </div>

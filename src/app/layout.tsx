@@ -41,7 +41,6 @@ export default function RootLayout({
         className={`${fredoka.className} ${readex_pro.variable} w-[100vw] overflow-x-hidden`}
       >
         <Providers>
-          <Hero />
           {children}
           <Footer />
           <Copyright />
