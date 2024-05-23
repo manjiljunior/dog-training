@@ -245,7 +245,28 @@ export const getContactpage = async () => {
   const res = await api.get(`/contact`);
   return res.data.data.attributes;
 };
-// ABOUTPAGE END
+// CONTACTPAGE END
+
+// FOOTER START
+export const getFooter = async () => {
+  const query = qs.stringify(
+    {
+      populate: ["logo"],
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await api.get(`/footer?${query}`);
+
+  console.log(res.data.data, "afds");
+
+  return {
+    ...res.data.data.attributes,
+    logo: thumbnailReducer(res.data.data.attributes.logo.data),
+  };
+};
+// FOOTER END
 
 // REVIEWS START
 export const reviewReducer = (data) => {
