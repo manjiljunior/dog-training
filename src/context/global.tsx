@@ -2,6 +2,7 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
 import api from "@/lib/api";
 import qs from "qs";
+import { thumbnailReducer } from "@/lib/datalayer";
 
 interface GlobalContextProps {
   menu: boolean;
@@ -30,7 +31,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   const fetchGlobalDataHandler = async () => {
     const query = qs.stringify(
       {
-        populate: ["global", "global.phones"],
+        populate: ["global", "global.phones", "global.logo", "global.socials"],
       },
       {
         encodeValuesOnly: true,
@@ -41,7 +42,10 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
     if (res.data) {
       const formattedObj = {
         id: res.data.data.id,
-        global: res.data.data.attributes.global,
+        global: {
+          ...res.data.data.attributes.global,
+          logo: thumbnailReducer(res.data.data.attributes.global.logo.data),
+        },
       };
       setGlobalData(formattedObj);
     } else {

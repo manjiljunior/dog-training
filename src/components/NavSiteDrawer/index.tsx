@@ -1,13 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Image from "next/image";
 import Backdrop from "./Backdrop";
 import { TfiClose } from "react-icons/tfi";
-import { FaFacebookSquare, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { GlobalContext } from "@/context/global";
+import { useMediaQuery } from "react-responsive";
 
 const NavSiteDrawer = () => {
   const [show, setShow] = useState(false);
+  const { globalData } = useContext(GlobalContext);
+
+  const isMobile480 = useMediaQuery({
+    query: "(max-width: 480px)",
+  });
 
   return (
     <div className="NavSiteDrawer">
@@ -42,14 +49,13 @@ const NavSiteDrawer = () => {
               className="mobile414:h-[5rem] h-[7rem] w-auto"
               height={200}
               width={200}
-              src="/icons/logo-dark.svg"
-              alt="Dog Training"
+              src={globalData?.global?.logo?.original}
+              alt={globalData?.global?.website_name}
             />
           </div>
 
           <p className="mobile414:text-[.9rem] text-[1.075rem] text-left font-[400] text-text-dark font-readex_pro leading-[1.65]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+            {globalData?.global?.description}
           </p>
 
           <ul className="flex flex-col gap-5">
@@ -62,7 +68,7 @@ const NavSiteDrawer = () => {
                 alt="Location Icon"
               />
               <p className="mobile414:text-[.9rem] text-[1.075rem] text-left font-[400] text-text-dark font-readex_pro leading-[1.5]">
-                No: 568 A, East Madison Street, Ready Hall, MD, Uk 587
+                {globalData?.global?.address}
               </p>
             </li>
 
@@ -75,7 +81,7 @@ const NavSiteDrawer = () => {
                 alt="Phone Icon"
               />
               <p className="mobile414:text-[.9rem] transition-all hover:text-primary cursor-pointer text-[1.075rem] text-left font-[400] text-text-dark font-readex_pro leading-[1.5]">
-                +91 12345678
+                {globalData?.global?.phones?.[0]?.name}
               </p>
             </li>
 
@@ -88,27 +94,55 @@ const NavSiteDrawer = () => {
                 alt="Email Icon"
               />
               <p className="mobile414:text-[.9rem] transition-all hover:text-primary cursor-pointer text-[1.075rem] text-left font-[400] text-text-dark font-readex_pro leading-[1.5]">
-                support@dogtraining.com
+                {globalData?.global?.email}
               </p>
             </li>
           </ul>
 
           <ul className="cursor-auto flex items-center justify-start w-full mt-5 gap-6">
-            <li>
-              <FaFacebookSquare size={20} />
-            </li>
+            {globalData?.global?.socials?.map((item, i) => {
+              if (item.name.toLowerCase() === "facebook") {
+                return (
+                  <li key={i}>
+                    <FaFacebook
+                      size={isMobile480 ? 15 : 22}
+                      className="MemberCard__icon"
+                    />
+                  </li>
+                );
+              }
+              if (item.name.toLowerCase() === "twitter") {
+                return (
+                  <li key={i}>
+                    <FaXTwitter
+                      size={isMobile480 ? 15 : 22}
+                      className="MemberCard__icon"
+                    />
+                  </li>
+                );
+              }
+              if (item.name.toLowerCase() === "instagram") {
+                return (
+                  <li key={i}>
+                    <FaInstagram
+                      size={isMobile480 ? 18 : 25}
+                      className="MemberCard__icon"
+                    />
+                  </li>
+                );
+              }
 
-            <li>
-              <FaXTwitter size={20} />
-            </li>
-
-            <li>
-              <FaInstagram size={22} />
-            </li>
-
-            <li>
-              <FaYoutube size={22} />
-            </li>
+              if (item.name.toLowerCase() === "youtube") {
+                return (
+                  <li key={i}>
+                    <FaYoutube
+                      size={isMobile480 ? 18 : 25}
+                      className="MemberCard__icon"
+                    />
+                  </li>
+                );
+              }
+            })}
           </ul>
 
           <div className="flex flex-col items-start w-full">

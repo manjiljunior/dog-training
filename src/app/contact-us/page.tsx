@@ -1,9 +1,13 @@
-import PageHeader from "@/components/PageHeader";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import React from "react";
+import PageHeader from "@/components/PageHeader";
+import Image from "next/image";
+import Component from "./Component";
+import { Button } from "@/components/ui/button";
+import { getContactpage } from "@/lib/datalayer";
 
-const ContactUs = () => {
+const ContactUs = async () => {
+  const contactpageData = await getContactpage();
+
   return (
     <React.Fragment>
       <PageHeader pageName="Contact us" />
@@ -63,77 +67,7 @@ const ContactUs = () => {
             </div>
           </div>
 
-          <div className="sm:col-span-12 col-span-5">
-            <h1 className="mobile414:text-[2.5rem] capitalize tracking-[.5px] text-text-dark text-[3.5rem] font-[700] leading-[1.35] mb-[2.5rem]">
-              We Are Always Available For You & Your Pets
-            </h1>
-
-            <p className="mobile414:text-[.9rem] mobile414:leading-[1.75] font-readex_pro text-[1.1rem] leading-[1.75] mb-[2rem]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              aspernatur praesentium excepturi. Debitis perferendis harum illum
-              dolor ad aperiam quasi, doloremque.
-            </p>
-
-            <div className="flex flex-col gap-[2.5rem]">
-              <div className="">
-                <div className="flex items-center gap-3 mb-[.5rem]">
-                  <Image
-                    className="mobile414:w-[1.25rem] mobile414:h-auto"
-                    height={25}
-                    width={25}
-                    src="/icons/location.svg"
-                    alt="Location Icon"
-                  />
-                  <h3 className="mobile414:text-[1rem] uppercase font-readex_pro font-semibold text-[1.25rem]">
-                    address
-                  </h3>
-                </div>
-
-                <p className="mobile414:text-[.9rem] ml-[1.5rem] text-[1.1rem] font-readex_pro">
-                  4821 Ridge Top Cir, Casper, WY 82609, United States
-                </p>
-              </div>
-
-              <div className="">
-                <div className="flex items-center gap-3 mb-[.5rem]">
-                  <Image
-                    className="mobile414:w-[1.25rem] mobile414:h-auto"
-                    height={25}
-                    width={25}
-                    src="/icons/phone.svg"
-                    alt="Location Icon"
-                  />
-                  <h3 className="mobile414:text-[1rem] uppercase font-readex_pro font-semibold text-[1.25rem]">
-                    contact
-                  </h3>
-                </div>
-
-                <ul className="mobile414:text-[.9rem] ml-[1.5rem] text-[1.1rem] font-readex_pro transition-all hover:text-primary cursor-pointer flex flex-col gap-1">
-                  <li>+00 123 456 789</li>
-                  <li>+000 1234 56789</li>
-                </ul>
-              </div>
-
-              <div className="">
-                <div className="flex items-center gap-3 mb-[.5rem]">
-                  <Image
-                    className="mobile414:w-[1.25rem] mobile414:h-auto"
-                    height={25}
-                    width={25}
-                    src="/icons/email.svg"
-                    alt="Location Icon"
-                  />
-                  <h3 className="mobile414:text-[1rem] uppercase font-readex_pro font-semibold text-[1.25rem]">
-                    email
-                  </h3>
-                </div>
-
-                <ul className="mobile414:text-[.9rem] ml-[1.5rem] text-[1.1rem] font-readex_pro transition-all hover:text-primary cursor-pointer flex flex-col gap-1">
-                  <li>info@example.com</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <Component data={contactpageData} />
         </div>
       </div>
     </React.Fragment>

@@ -240,6 +240,13 @@ export const getAboutpage = async () => {
 };
 // ABOUTPAGE END
 
+// CONTACTPAGE START
+export const getContactpage = async () => {
+  const res = await api.get(`/contact`);
+  return res.data.data.attributes;
+};
+// ABOUTPAGE END
+
 // REVIEWS START
 export const reviewReducer = (data) => {
   let review = { ...data.attributes };
