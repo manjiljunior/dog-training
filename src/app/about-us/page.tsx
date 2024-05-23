@@ -22,10 +22,10 @@ export default async function AboutUs() {
       <PageHeader pageName="About us" />
       {aboutpageData?.about && <SectionAbout data={aboutpageData.about} />}
       {trainers?.length && <SectionTeam data={trainers} />}
-      {aboutpageData?.faq && (
+      {aboutpageData?.review && (
         <SectionReviews
-          title={aboutpageData.faq.title}
-          image={aboutpageData.faq?.image?.original}
+          title={aboutpageData.review.title}
+          image={aboutpageData.review?.image?.original}
           data={reviews}
         />
       )}

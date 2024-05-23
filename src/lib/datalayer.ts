@@ -200,8 +200,8 @@ export const getAboutpage = async () => {
         "stats.cta_btn",
         "stats.stats",
         "stats.stats.icon",
-        "faq",
-        "faq.image",
+        "review",
+        "review.image",
       ],
     },
     {
@@ -229,10 +229,10 @@ export const getAboutpage = async () => {
     };
   }
 
-  if (res.data.data.attributes?.faq) {
-    res.data.data.attributes.faq = {
-      ...res.data.data.attributes.faq,
-      image: thumbnailReducer(res.data.data.attributes.faq.image.data),
+  if (res.data.data.attributes?.review) {
+    res.data.data.attributes.review = {
+      ...res.data.data.attributes.review,
+      image: thumbnailReducer(res.data.data.attributes.review.image.data),
     };
   }
 
