@@ -2,8 +2,33 @@ import React from "react";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
 import Component from "./Component";
-import { Button } from "@/components/ui/button";
-import { getContactpage } from "@/lib/datalayer";
+import {
+  getContactpage,
+  getContactpageSeo,
+  getGlobalDataSeo,
+} from "@/lib/datalayer";
+import Form from "./Form";
+
+import type { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const globalData = await getGlobalDataSeo();
+  const contactpageData = await getContactpageSeo();
+
+  return {
+    title: contactpageData?.seo?.title || globalData?.seo?.title,
+    description:
+      contactpageData?.seo?.description || globalData?.seo?.description,
+  };
+}
 
 const ContactUs = async () => {
   const contactpageData = await getContactpage();
@@ -36,34 +61,7 @@ const ContactUs = async () => {
                 react us now
               </h2>
 
-              <form className="flex flex-col gap-[3.25rem]">
-                <input
-                  type="text"
-                  placeholder="name"
-                  className="mobile414:text-[1rem] outline-none focus:border-black border-b border-black/10 bg-transparent py-[.6rem] text-[1.25rem] placeholder:capitalize placeholder:text-black/40"
-                />
-
-                <input
-                  type="email"
-                  placeholder="your email"
-                  className="mobile414:text-[1rem] outline-none focus:border-black border-b border-black/10 bg-transparent py-[.6rem] text-[1.25rem] placeholder:capitalize placeholder:text-black/40"
-                />
-
-                <input
-                  type="text"
-                  placeholder="subject"
-                  className="mobile414:text-[1rem] outline-none focus:border-black border-b border-black/10 bg-transparent py-[.6rem] text-[1.25rem] placeholder:capitalize placeholder:text-black/40"
-                />
-
-                <textarea
-                  placeholder="your message"
-                  className="mobile414:text-[1rem] outline-none focus:border-black resize-none h-[8rem] border-b border-black/10 bg-transparent py-[.6rem] text-[1.25rem] placeholder:capitalize placeholder:text-black/40"
-                />
-
-                <Button className="mobile414:text-[.8rem]" variant={"default"}>
-                  submit
-                </Button>
-              </form>
+              <Form />
             </div>
           </div>
 

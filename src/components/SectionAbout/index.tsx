@@ -6,27 +6,6 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { GlobalContext } from "@/context/global";
 
-const FEATURES = [
-  {
-    name: "24/7 support",
-  },
-  {
-    name: "Personalized care",
-  },
-  {
-    name: "Pet taxi facility",
-  },
-  {
-    name: "Quick delivery",
-  },
-  {
-    name: "Money back garantuee",
-  },
-  {
-    name: "Lowest price",
-  },
-];
-
 interface Props {
   data: any;
 }

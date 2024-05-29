@@ -153,6 +153,7 @@ export const getHomepage = async () => {
   const query = qs.stringify(
     {
       populate: [
+        "seo",
         "hero",
         "hero.cta_btn",
         "hero.secondary_btn",
@@ -182,6 +183,20 @@ export const getHomepage = async () => {
       image: thumbnailReducer(res.data.data.attributes.about.image.data),
     };
   }
+
+  return res.data.data.attributes;
+};
+
+export const getHomepageSeo = async () => {
+  const query = qs.stringify(
+    {
+      populate: ["seo"],
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await api.get(`/home?${query}`);
 
   return res.data.data.attributes;
 };
@@ -238,6 +253,20 @@ export const getAboutpage = async () => {
 
   return res.data.data.attributes;
 };
+
+export const getAboutpageSeo = async () => {
+  const query = qs.stringify(
+    {
+      populate: ["seo"],
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await api.get(`/about?${query}`);
+
+  return res.data.data.attributes;
+};
 // ABOUTPAGE END
 
 // CONTACTPAGE START
@@ -245,7 +274,35 @@ export const getContactpage = async () => {
   const res = await api.get(`/contact`);
   return res.data.data.attributes;
 };
+
+export const getContactpageSeo = async () => {
+  const query = qs.stringify(
+    {
+      populate: ["seo"],
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await api.get(`/contact?${query}`);
+  return res.data.data.attributes;
+};
 // CONTACTPAGE END
+
+// SERVICEPAFW START
+export const getServicepageSeo = async () => {
+  const query = qs.stringify(
+    {
+      populate: ["seo"],
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await api.get(`/servicepage?${query}`);
+  return res.data.data.attributes;
+};
+// SERVICEPAFW END
 
 // FOOTER START
 export const getFooter = async () => {
@@ -258,8 +315,6 @@ export const getFooter = async () => {
     }
   );
   const res = await api.get(`/footer?${query}`);
-
-  console.log(res.data.data, "afds");
 
   return {
     ...res.data.data.attributes,
@@ -303,3 +358,46 @@ export const getReviews = async ({ page = 1, pageSize = 6 } = {}) => {
   };
 };
 // REVIEWS END
+
+// GLOBAL START
+export const getGlobalData = async () => {
+  const query = qs.stringify(
+    {
+      populate: [
+        "seo",
+        "global",
+        "global.phones",
+        "global.logo",
+        "global.socials",
+      ],
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await api.get(`/global?${query}`);
+
+  if (res.data.data.attributes?.global) {
+    res.data.data.attributes.global = {
+      ...res.data.data.attributes.global,
+      logo: thumbnailReducer(res.data.data.attributes.global.logo.data),
+    };
+  }
+
+  return res.data.data.attributes;
+};
+
+export const getGlobalDataSeo = async () => {
+  const query = qs.stringify(
+    {
+      populate: ["seo"],
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await api.get(`/global?${query}`);
+
+  return res.data.data.attributes;
+};
+// GLOBAL END

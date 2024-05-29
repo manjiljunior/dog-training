@@ -4,7 +4,33 @@ import SectionAbout from "@/components/SectionAbout";
 import SectionReviews from "@/components/SectionReviews";
 import SectionStats from "@/components/SectionStats";
 import SectionTeam from "@/components/SectionTeam";
-import { getAboutpage, getReviews, getTrainers } from "@/lib/datalayer";
+import {
+  getAboutpage,
+  getAboutpageSeo,
+  getGlobalDataSeo,
+  getReviews,
+  getTrainers,
+} from "@/lib/datalayer";
+import type { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const globalData = await getGlobalDataSeo();
+  const aboutpageData = await getAboutpageSeo();
+
+  return {
+    title: aboutpageData?.seo?.title || globalData?.seo?.title,
+    description:
+      aboutpageData?.seo?.description || globalData?.seo?.description,
+  };
+}
 
 export default async function AboutUs() {
   const aboutpageData = await getAboutpage();

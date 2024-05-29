@@ -1,7 +1,32 @@
+import React from "react";
 import PageHeader from "@/components/PageHeader";
 import ServiceCard from "@/components/ServiceCard";
-import { getServices } from "@/lib/datalayer";
-import React from "react";
+import {
+  getGlobalDataSeo,
+  getServicepageSeo,
+  getServices,
+} from "@/lib/datalayer";
+
+import type { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const globalData = await getGlobalDataSeo();
+  const servicepageData = await getServicepageSeo();
+
+  return {
+    title: servicepageData?.seo?.title || globalData?.seo?.title,
+    description:
+      servicepageData?.seo?.description || globalData?.seo?.description,
+  };
+}
 
 const Services = async () => {
   const { services } = await getServices({
