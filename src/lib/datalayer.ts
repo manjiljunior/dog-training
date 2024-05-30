@@ -399,5 +399,6 @@ export const getGlobalDataSeo = async () => {
   const res = await api.get(`/global?${query}`);
 
   return res.data.data.attributes;
+  
 };
 // GLOBAL END
